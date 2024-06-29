@@ -21,16 +21,18 @@ function setAttributes(element, attributes) {
 
 // Check if all images were loaded
 function imageLoaded() {
-  imagesLoaded = 0;
   imagesLoaded++;
+  console.log("imagesLoaded = ", imagesLoaded);
   if (imagesLoaded === totalImages) {
     ready = true;
+    loader.hidden = true;
     console.log("ready =", ready);
   }
 }
 
 // Adding Elements for photos and links to DOM
 const displayPhotos = () => {
+  imagesLoaded = 0;
   totalImages = photosArray.length;
   console.log("totalImages =", totalImages);
   photosArray.forEach((photo) => {
@@ -48,7 +50,7 @@ const displayPhotos = () => {
       title: photo.alt_description,
     });
     // Event Listener, check when each is finished loading
-    img.addEventListener("load", imageLoaded);
+    img.addEventListener("load", imageLoaded());
     // Put <img> inside <a>, then put both inside imageContainer element
     item.appendChild(img);
     imageContainer.appendChild(item);
