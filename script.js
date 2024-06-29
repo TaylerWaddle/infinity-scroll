@@ -62,7 +62,11 @@ async function getPhotos() {
     photosArray = await response.json();
     displayPhotos();
   } catch (error) {
-    console.log(error);
+    if (error instanceof SyntaxError) {
+      alert("Out of API requests. Try again in 1 hour...");
+    } else {
+      console.log(error);
+    }
   }
 }
 
